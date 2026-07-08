@@ -1,11 +1,23 @@
 // Active page link
 const links = document.querySelectorAll("nav a");
 
+function normalizePath(path) {
+    if (path === "/" || path === "/index.html") {
+        return "/";
+    }
+
+    return path;
+}
+
 function setActiveLink() {
+    const currentPath = normalizePath(window.location.pathname);
+
     links.forEach(link => {
+        const linkPath = normalizePath(link.pathname);
+
         link.classList.toggle(
             "active-page-link",
-            link.pathname === window.location.pathname
+            linkPath === currentPath
         );
     });
 }
