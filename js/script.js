@@ -1,18 +1,16 @@
 // Active page link
-const links = document.querySelectorAll("nav a");
-
+const links = document.querySelectorAll(
+    ".navbar-navigation a, .menu-list a"
+);
 links.forEach(link => {
+    const current = window.location.pathname === '/' 
+        ? "/index.html" 
+        : window.location.pathname
+
     link.classList.toggle(
         "active-page-link",
-        link.pathname === window.location.pathname
+        link.pathname === current
     );
-});
-
-window.addEventListener("pageshow", (event) => {
-
-    if (event.persisted) {
-        window.location.reload();
-    }
 });
 
 // Popup contacts
@@ -99,3 +97,12 @@ const handleScreenChange = (e) => {
 mediaQuery.addEventListener("change", handleScreenChange);
 
 handleScreenChange(mediaQuery);
+
+window.addEventListener("pageshow", (event) => {
+
+    burger.classList.remove("burger-active");
+
+    if (event.persisted) {
+        window.location.reload();
+    }
+});
