@@ -1,23 +1,28 @@
+// Active page link
 const links = document.querySelectorAll("nav a");
 
+const currentPath = window.location.pathname;
+
 links.forEach(link => {
-    if (link.pathname === window.location.pathname) {
-        link.classList.add("active-page-link");
-    }
-    else {
-        link.classList.remove("active-page-link");
-    }
+    link.classList.toggle(
+        "active-page-link",
+        link.pathname === currentPath
+    );
 });
 
+// Popup contacts
 const popupContacts = document.querySelector("#popup-contacts");
 const popupContent = document.querySelector(".popup-content");
-
 const openPopupBtn = document.querySelector("#contact-btn");
 const closePopupBtn = document.querySelector("#popup-contacts-btn");
 
+const toggleScroll = (state) => {
+    document.body.classList.toggle("no-scroll", state);
+};
+
 openPopupBtn.addEventListener("click", () => {
     popupContacts.showModal();
-    document.body.classList.add("no-scroll");
+    toggleScroll(true);
 });
 
 closePopupBtn.addEventListener("click", () => {
@@ -25,21 +30,19 @@ closePopupBtn.addEventListener("click", () => {
 });
 
 popupContacts.addEventListener("click", (e) => {
-    const rect = popupContent.getBoundingClientRect();
+    const isOutside = !popupContent.contains(e.target);
 
-    if (e.clientX < rect.left ||
-        e.clientX > rect.right ||
-        e.clientY < rect.top ||
-        e.clientY > rect.bottom) 
-    {
+    if (isOutside) {
         popupContacts.close();
     }
 });
 
 popupContacts.addEventListener("close", () => {
-    document.body.classList.remove("no-scroll");
+    toggleScroll(false);
 });
 
+
+// Burger menu
 const burger = document.querySelector(".burger");
 const burgerBtn = document.querySelector(".burger-btn");
 
@@ -47,49 +50,46 @@ const main = document.querySelector("main");
 const navbar = document.querySelector(".navbar");
 const footer = document.querySelector("footer");
 
-burgerBtn.addEventListener("click", () => {
+const pageElements = [
+    navbar,
+    main,
+    footer
+];
 
-    if (burger.classList.contains("burger-active")) {
-        burger.classList.remove("burger-active");
+const toggleInert = (state) => {
+    pageElements.forEach(element => {
+        element.inert = state;
+    });
 
-        navbar.inert = false;
-        main.inert = false;
-        footer.inert = false;
+    burger.inert = !state;
+};
 
-        burger.inert = true;
-    }
-    else {
-        burger.classList.add("burger-active");
+const toggleBurger = () => {
+    const isActive = burger.classList.toggle("burger-active");
 
-        navbar.inert = true;
-        main.inert = true;
-        footer.inert = true;
+    burgerBtn.classList.toggle("burger-btn-active", isActive);
+    toggleScroll(isActive);
+    toggleInert(isActive);
+};
 
-        burger.inert = false;
-    }
+burgerBtn.addEventListener("click", toggleBurger);
 
-    burgerBtn.classList.toggle("burger-btn-active");
-    document.body.classList.toggle("no-scroll");
-});
 
+// Responsive behavior
 const mediaQuery = window.matchMedia("(min-width: 700px)");
 
-function handleScreenChange(e) {
-  if (e.matches) {
-        navbar.inert = false;
-        main.inert = false;
-        footer.inert = false;
+const handleScreenChange = (e) => {
+    if (e.matches) {
+        burger.classList.remove("burger-active");
+        burgerBtn.classList.remove("burger-btn-active");
 
-        burger.inert = true;
-  }
-  else {
-        navbar.inert = true;
-        main.inert = true;
-        footer.inert = true;
-
-        burger.inert = false;
-  }
-}
+        toggleScroll(false);
+        toggleInert(false);
+    }
+    else {
+        toggleInert(true);
+    }
+};
 
 mediaQuery.addEventListener("change", handleScreenChange);
 
