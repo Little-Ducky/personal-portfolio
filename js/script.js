@@ -1,13 +1,19 @@
 // Active page link
 const links = document.querySelectorAll("nav a");
 
-const currentPath = window.location.pathname;
+function setActiveLink() {
+    links.forEach(link => {
+        link.classList.toggle(
+            "active-page-link",
+            link.pathname === window.location.pathname
+        );
+    });
+}
 
-links.forEach(link => {
-    link.classList.toggle(
-        "active-page-link",
-        link.pathname === currentPath
-    );
+setActiveLink();
+
+window.addEventListener("pageshow", () => {
+    setActiveLink();
 });
 
 // Popup contacts
