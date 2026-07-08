@@ -98,11 +98,12 @@ mediaQuery.addEventListener("change", handleScreenChange);
 
 handleScreenChange(mediaQuery);
 
-window.addEventListener("pageshow", (event) => {
-
+window.addEventListener("pageshow", () => {
     burger.classList.remove("burger-active");
+    burgerBtn.classList.remove("burger-btn-active");
 
-    if (event.persisted) {
-        window.location.reload();
-    }
+    toggleScroll(false);
+    toggleInert(false);
+
+    handleScreenChange(mediaQuery);
 });
