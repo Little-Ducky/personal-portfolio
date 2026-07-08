@@ -14,12 +14,12 @@
     <div class="container">
 
         <header class="header">
-            <nav>
+            <nav class="navbar">
                 <a href="index.html" class="logo">
                     <img src="assets/img/logo.svg" width="25" alt="Logo">
                 </a>
 
-                <ul class="navbar">
+                <ul class="navbar-navigation">
                     <li><a href="index.html">Intro</a></li>
                     <li><a href="cv.html">CV</a></li>
                 </ul>
@@ -27,10 +27,9 @@
                 <button class="contact-btn" id="contact-btn">
                     Get In Touch
                 </button>
-
-                <button class="burger-btn">
-                </button>
             </nav>
+            <button class="burger-btn">
+            </button>
         </header>
 
         <main class="content-intro content">
@@ -119,7 +118,7 @@
         </footer>
     </div>
 
-    <div class="burger">
+    <div class="burger" inert="true">
         <div class="burger-content">
             <nav class="burger-nav">
                 <ul class="menu-list">
@@ -129,21 +128,21 @@
             </nav>
 
             <div class="contact-section">
-                <div class="contact-item">
+                <div class="contact-item-burger">
                     <span>💻 GitHub</span>
                     <a href="https://github.com/Little-Ducky" target="_blank">
                         Little-Ducky
                     </a>
                 </div>
 
-                <div class="contact-item">
+                <div class="contact-item-burger">
                     <span>✉️ Email</span>
                     <a href="mailto:vitalytorhan@gmail.com">
                         vitalytorhan@gmail.com
                     </a>
                 </div>
 
-                <div class="contact-item">
+                <div class="contact-item-burger">
                     <span>💼 LinkedIn</span>
                     <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank">
                         linkedin.com/in/YOUR_USERNAME
@@ -153,31 +152,34 @@
 
         </div>
     </div>
-    
-    <div class="popup" id="popup-contacts">
-        <div class="popup-content">
-            <button id="popup-contacts-btn">×</button>
 
-            <div class="contact-item">
+    <dialog id="popup-contacts">
+        <div class="popup-content">
+            <button id="popup-contacts-btn">
+            </button>
+
+            <div class="contact-item-popup">
                 <h2>GitHub:</h2>
                 <a href="https://github.com/Little-Ducky" target="_blank">
                     Little-Ducky
                 </a>
             </div>
-            <div class="contact-item">
+
+            <div class="contact-item-popup">
                 <h2>Email:</h2>
-                <a href="mailto:vitalytorhan@gmail.com" target="_blank">
-                    Email
+                <a href="mailto:vitalytorhan@gmail.com">
+                    vitalytorhan@gmail.com
                 </a>
             </div>
-            <div class="contact-item">
+
+            <div class="contact-item-popup">
                 <h2>LinkedIn:</h2>
-                <a href="https://github.com/Little-Ducky" target="_blank">
+                <a href="https://linkedin.com/" target="_blank">
                     LinkedIn
                 </a>
             </div>
         </div>
-    </div>
+    </dialog>
 
     <script src="js/script.js"></script>
 </body>

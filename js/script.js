@@ -15,34 +15,82 @@ const popupContent = document.querySelector(".popup-content");
 const openPopupBtn = document.querySelector("#contact-btn");
 const closePopupBtn = document.querySelector("#popup-contacts-btn");
 
-popupContent.addEventListener("click", (event) => {
-    event.stopPropagation();
-});
-
 openPopupBtn.addEventListener("click", () => {
-    popupContacts.classList.add("popup-contacts-active");
-
-    document.body.classList.add("popup-open");
+    popupContacts.showModal();
+    document.body.classList.add("no-scroll");
 });
 
 closePopupBtn.addEventListener("click", () => {
-    popupContacts.classList.remove("popup-contacts-active");
-
-    document.body.classList.remove("popup-open");
+    popupContacts.close();
 });
 
-popupContacts.addEventListener("click", () => {
-    popupContacts.classList.remove("popup-contacts-active");
+popupContacts.addEventListener("click", (e) => {
+    const rect = popupContent.getBoundingClientRect();
 
-    document.body.classList.remove("popup-open");
+    if (e.clientX < rect.left ||
+        e.clientX > rect.right ||
+        e.clientY < rect.top ||
+        e.clientY > rect.bottom) 
+    {
+        popupContacts.close();
+    }
+});
+
+popupContacts.addEventListener("close", () => {
+    document.body.classList.remove("no-scroll");
 });
 
 const burger = document.querySelector(".burger");
 const burgerBtn = document.querySelector(".burger-btn");
 
-burgerBtn.addEventListener("click", () => {
-    burger.classList.toggle("burger-active");
-    burgerBtn.classList.toggle("burger-btn-active");
+const main = document.querySelector("main");
+const navbar = document.querySelector(".navbar");
+const footer = document.querySelector("footer");
 
-    document.body.classList.toggle("popup-open");
+burgerBtn.addEventListener("click", () => {
+
+    if (burger.classList.contains("burger-active")) {
+        burger.classList.remove("burger-active");
+
+        navbar.inert = false;
+        main.inert = false;
+        footer.inert = false;
+
+        burger.inert = true;
+    }
+    else {
+        burger.classList.add("burger-active");
+
+        navbar.inert = true;
+        main.inert = true;
+        footer.inert = true;
+
+        burger.inert = false;
+    }
+
+    burgerBtn.classList.toggle("burger-btn-active");
+    document.body.classList.toggle("no-scroll");
 });
+
+const mediaQuery = window.matchMedia("(min-width: 700px)");
+
+function handleScreenChange(e) {
+  if (e.matches) {
+        navbar.inert = false;
+        main.inert = false;
+        footer.inert = false;
+
+        burger.inert = true;
+  }
+  else {
+        navbar.inert = true;
+        main.inert = true;
+        footer.inert = true;
+
+        burger.inert = false;
+  }
+}
+
+mediaQuery.addEventListener("change", handleScreenChange);
+
+handleScreenChange(mediaQuery);
