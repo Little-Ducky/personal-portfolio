@@ -2,14 +2,15 @@
 const links = document.querySelectorAll(
     ".navbar-navigation a, .menu-list a"
 );
+
 links.forEach(link => {
     const current = window.location.pathname === '/' 
         ? "/index.html" 
-        : window.location.pathname
+        : window.location.pathname.replace("/personal-portfolio", "");
 
     link.classList.toggle(
         "active-page-link",
-        link.pathname === current
+        link.pathname.replace("/personal-portfolio", "") === current
     );
 });
 
@@ -97,13 +98,3 @@ const handleScreenChange = (e) => {
 mediaQuery.addEventListener("change", handleScreenChange);
 
 handleScreenChange(mediaQuery);
-
-window.addEventListener("pageshow", () => {
-    burger.classList.remove("burger-active");
-    burgerBtn.classList.remove("burger-btn-active");
-
-    toggleScroll(false);
-    toggleInert(false);
-
-    handleScreenChange(mediaQuery);
-});
