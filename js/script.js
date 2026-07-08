@@ -1,31 +1,18 @@
 // Active page link
 const links = document.querySelectorAll("nav a");
 
-function normalizePath(path) {
-    if (path === "/" || path === "/index.html") {
-        return "/";
+links.forEach(link => {
+    link.classList.toggle(
+        "active-page-link",
+        link.pathname === window.location.pathname
+    );
+});
+
+window.addEventListener("pageshow", (event) => {
+
+    if (event.persisted) {
+        window.location.reload();
     }
-
-    return path;
-}
-
-function setActiveLink() {
-    const currentPath = normalizePath(window.location.pathname);
-
-    links.forEach(link => {
-        const linkPath = normalizePath(link.pathname);
-
-        link.classList.toggle(
-            "active-page-link",
-            linkPath === currentPath
-        );
-    });
-}
-
-setActiveLink();
-
-window.addEventListener("pageshow", () => {
-    setActiveLink();
 });
 
 // Popup contacts
