@@ -4,13 +4,16 @@ const links = document.querySelectorAll(
 );
 
 links.forEach(link => {
-    const current = window.location.pathname === '/' 
-        ? "/index.html" 
-        : window.location.pathname.replace("/personal-portfolio", "");
+    /personal-portfolio/
 
+    const current = window.location.pathname.endsWith('/')
+        ? window.location.pathname + "index.html"
+        : window.location.pathname
+
+    
     link.classList.toggle(
         "active-page-link",
-        link.pathname.replace("/personal-portfolio", "") === current
+        link.pathname === current
     );
 });
 
@@ -98,3 +101,4 @@ const handleScreenChange = (e) => {
 mediaQuery.addEventListener("change", handleScreenChange);
 
 handleScreenChange(mediaQuery);
+
