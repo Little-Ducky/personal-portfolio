@@ -4,7 +4,7 @@ const links = document.querySelectorAll(
 );
 
 links.forEach(link => {
-    /personal-portfolio/
+    console.log(window.location.pathname)
 
     const current = window.location.pathname.endsWith('/')
         ? window.location.pathname + "index.html"
