@@ -4,13 +4,10 @@ const links = document.querySelectorAll(
 );
 
 links.forEach(link => {
-    console.log(window.location.pathname)
-
     const current = window.location.pathname.endsWith('/')
         ? window.location.pathname + "index.html"
         : window.location.pathname
 
-    
     link.classList.toggle(
         "active-page-link",
         link.pathname === current
@@ -102,3 +99,14 @@ mediaQuery.addEventListener("change", handleScreenChange);
 
 handleScreenChange(mediaQuery);
 
+const closeBurger = () => {
+    burger.classList.remove("burger-active");
+    burgerBtn.classList.remove("burger-btn-active");
+
+    toggleScroll(false);
+    toggleInert(false);
+};
+
+window.addEventListener("pageshow", () => {
+    closeBurger();
+});
