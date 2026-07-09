@@ -17,7 +17,11 @@ links.forEach(link => {
 //burger
 document.querySelectorAll(".menu-list a").forEach(link => {
     link.addEventListener("click", () => {
-        closeBurger();
+        burger.classList.remove("burger-active");
+        burgerBtn.classList.remove("burger-btn-active");
+
+        toggleScroll(false);
+        toggleInert(false);
     });
 });
 
@@ -105,11 +109,3 @@ const handleScreenChange = (e) => {
 mediaQuery.addEventListener("change", handleScreenChange);
 
 handleScreenChange(mediaQuery);
-
-const closeBurger = () => {
-    burger.classList.remove("burger-active");
-    burgerBtn.classList.remove("burger-btn-active");
-
-    toggleScroll(false);
-    toggleInert(false);
-};
