@@ -102,7 +102,7 @@ const handleScreenChange = (e) => {
         toggleInert(false);
     }
     else {
-        toggleInert(true);
+        toggleInert(false);
     }
 };
 
