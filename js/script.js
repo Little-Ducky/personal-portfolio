@@ -14,6 +14,13 @@ links.forEach(link => {
     );
 });
 
+//burger
+document.querySelectorAll(".menu-list a").forEach(link => {
+    link.addEventListener("click", () => {
+        closeBurger();
+    });
+});
+
 // Popup contacts
 const popupContacts = document.querySelector("#popup-contacts");
 const popupContent = document.querySelector(".popup-content");
@@ -106,7 +113,3 @@ const closeBurger = () => {
     toggleScroll(false);
     toggleInert(false);
 };
-
-window.addEventListener("pageshow", () => {
-    closeBurger();
-});
