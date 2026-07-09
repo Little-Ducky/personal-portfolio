@@ -505,21 +505,21 @@ nav a.active-page-link {
 
 
 .contact-item-popup {
-    display: flex;
-    align-items: center;
-
     gap: 10px;
 
     margin: 15px 0;
 }
 
-
 .contact-item-popup h2 {
-    margin: 0;
-
-    font-size: 20px;
+    display: inline-flex;
 }
 
+.contact-item-popup h2, .contact-item-popup a{
+    margin: 0;
+    padding: 2px;
+
+    font-size: 16px;
+}
 
 /* =========================
    BURGER MENU
