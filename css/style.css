@@ -542,6 +542,8 @@ nav a.active-page-link {
 
     transform: translateY(-100%);
 
+    visibility: hidden;
+
     transition: transform .3s ease;
 
     overflow-y: auto;
@@ -549,11 +551,10 @@ nav a.active-page-link {
     z-index: 43;
 }
 
-
 .burger-active {
     transform: translateY(0);
+    visibility: visible;
 }
-
 
 .burger-content {
     width: 100%;

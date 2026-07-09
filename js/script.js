@@ -110,3 +110,4 @@ const closeBurger = () => {
 window.addEventListener("pageshow", () => {
     closeBurger();
 });
+
